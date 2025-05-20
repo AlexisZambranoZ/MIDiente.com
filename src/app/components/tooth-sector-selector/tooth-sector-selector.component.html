@@ -1,0 +1,26 @@
+<svg viewBox="0 0 200 200" width="75" height="75" style="cursor:pointer;">
+  <!-- Sector 1 (45° a 135°) -->
+  <path d="M100,100 L163.6,36.4 A90,90 0 0,0 36.4,36.4 Z"
+        [attr.fill]="isSelected(1) ? '#4caf50' : '#ccc'"
+        (click)="toggleSector(1)" />
+
+  <!-- Sector 2 (135° a 225°) -->
+  <path d="M100,100 L36.4,36.4 A90,90 0 0,0 36.4,163.6 Z"
+        [attr.fill]="isSelected(2) ? '#4caf50' : '#ccc'"
+        (click)="toggleSector(2)" />
+
+  <!-- Sector 3 (225° a 315°) -->
+  <path d="M100,100 L36.4,163.6 A90,90 0 0,0 163.6,163.6 Z"
+        [attr.fill]="isSelected(3) ? '#4caf50' : '#ccc'"
+        (click)="toggleSector(3)" />
+
+  <!-- Sector 4 (315° a 45°) -->
+  <path d="M100,100 L163.6,163.6 A90,90 0 0,0 163.6,36.4 Z"
+        [attr.fill]="isSelected(4) ? '#4caf50' : '#ccc'"
+        (click)="toggleSector(4)" />
+
+  <!-- Centro circular -->
+  <circle cx="100" cy="100" r="30"
+          [attr.fill]="isSelected(5) ? '#4caf50' : '#999'"
+          (click)="toggleSector(5)" />
+</svg>

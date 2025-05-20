@@ -1,0 +1,295 @@
+<form [formGroup]="form" (ngSubmit)="enviar()" style="max-width: 100rem; height: 50rem;"
+  class="mx-auto my-8 p-6 bg-white rounded shadow-md space-y-6">
+
+  <!-- Página 1: Datos Personales -->
+  <div *ngIf="currentStep === 1">
+    <h2 class="text-xl font-semibold mb-4">Datos Personales</h2>
+
+    <!-- Nombre(s) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Nombre(s)</mat-label>
+        <input matInput formControlName="firstName" placeholder="Nombre(s)" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Apellido Paterno</mat-label>
+        <input matInput formControlName="lastNamePaternal" placeholder="Apellido Paterno" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Apellido Materno</mat-label>
+        <input matInput formControlName="lastNameMaternal" placeholder="Apellido Materno" />
+      </mat-form-field>
+    </div>
+
+    <!-- Sexo y Fecha de nacimiento -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="H">Hombre</mat-option>
+          <mat-option value="M">Mujer</mat-option>
+          <mat-option value="Otro">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput formControlName="birthDate" type="date" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Edad</mat-label>
+        <input matInput formControlName="age" type="number" min="0" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Estado Civil</mat-label>
+        <input matInput formControlName="maritalStatus" placeholder="Estado Civil" />
+      </mat-form-field>
+    </div>
+
+    <!-- Teléfonos y Ocupación -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Teléfono Fijo</mat-label>
+        <input matInput formControlName="phoneLandline" placeholder="Opcional" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Teléfono Móvil</mat-label>
+        <input matInput formControlName="phoneMobile" placeholder="Opcional" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Ocupación</mat-label>
+        <input matInput formControlName="occupation" placeholder="Ocupación" />
+      </mat-form-field>
+    </div>
+
+    <!-- Dirección -->
+    <h3 class="text-lg font-semibold mt-6 mb-2">Dirección</h3>
+    <div formGroupName="address" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Calle</mat-label>
+        <input matInput formControlName="street" placeholder="Calle" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="number" placeholder="Número" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Colonia</mat-label>
+        <input matInput formControlName="neighborhood" placeholder="Colonia" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Código Postal</mat-label>
+        <input matInput formControlName="postalCode" placeholder="Código Postal" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Municipio</mat-label>
+        <input matInput formControlName="municipality" placeholder="Municipio" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="state" placeholder="Estado" />
+      </mat-form-field>
+    </div>
+
+    <!-- Observaciones -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput formControlName="observations" rows="3" placeholder="Observaciones (opcional)"></textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- Página 2: Datos Patológicos -->
+  <div *ngIf="currentStep === 2">
+    <h2 class="text-xl font-semibold mb-4">Datos Patológicos</h2>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Motivo de Consulta</mat-label>
+      <textarea matInput formControlName="reasonForConsultation" rows="3" placeholder="Motivo de Consulta"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Fecha del padecimiento actual</mat-label>
+      <input matInput formControlName="currentIllnessDate" type="date" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Tratamiento previo (opcional)</mat-label>
+      <textarea matInput formControlName="previousTreatment" rows="2"
+        placeholder="Tratamiento previo (opcional)"></textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- Página 3: Antecedentes Patológicos -->
+  <div *ngIf="currentStep === 3" formGroupName="pathologicalHistory">
+    <h2 class="text-xl font-semibold mb-4">Antecedentes Patológicos</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-checkbox formControlName="rheumaticFever">Fiebre Reumática</mat-checkbox>
+      <mat-checkbox formControlName="cardiopathies">Cardiopatías</mat-checkbox>
+      <mat-checkbox formControlName="pepticUlcer">Úlcera Péptica</mat-checkbox>
+      <mat-checkbox formControlName="heartAttacks">Infartos</mat-checkbox>
+      <mat-checkbox formControlName="gastritis">Gastritis</mat-checkbox>
+      <mat-checkbox formControlName="hernias">Hernias</mat-checkbox>
+      <mat-checkbox formControlName="allergies">Alergias</mat-checkbox>
+      <mat-form-field appearance="fill" class="w-full" *ngIf="form.get('pathologicalHistory.allergies')?.value">
+        <mat-label>Especifique alergias</mat-label>
+        <input matInput formControlName="allergiesDetails" />
+      </mat-form-field>
+      <mat-checkbox formControlName="diabetes">Diabetes</mat-checkbox>
+      <mat-checkbox formControlName="anemia">Anemia</mat-checkbox>
+      <mat-checkbox formControlName="varicoseVeins">Várices</mat-checkbox>
+      <mat-checkbox formControlName="measles">Sarampión</mat-checkbox>
+      <mat-checkbox formControlName="dizziness">Mareos</mat-checkbox>
+      <mat-checkbox formControlName="scarletFever">Escarlatina</mat-checkbox>
+      <mat-checkbox formControlName="hepatitis">Hepatitis</mat-checkbox>
+      <mat-form-field appearance="fill" class="w-full" *ngIf="form.get('pathologicalHistory.hepatitis')?.value">
+        <mat-label>Especifique hepatitis</mat-label>
+        <input matInput formControlName="hepatitisDetails" />
+      </mat-form-field>
+      <mat-checkbox formControlName="chickenpox">Varicela</mat-checkbox>
+      <mat-checkbox formControlName="hiv">VIH</mat-checkbox>
+      <mat-checkbox formControlName="fainting">Desmayos</mat-checkbox>
+      <mat-checkbox formControlName="hpv">VPH</mat-checkbox>
+      <mat-checkbox formControlName="headaches">Dolores de cabeza</mat-checkbox>
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full mt-4">
+      <mat-label>Otro (especifique)</mat-label>
+      <input matInput formControlName="otherCondition" />
+    </mat-form-field>
+  </div>
+
+
+  <!-- Página 4: Antecedentes Heredo-Familiares -->
+  <div *ngIf="currentStep === 4" formGroupName="familyMedicalHistory">
+    <h2 class="text-xl font-semibold mb-4">Antecedentes Heredo-Familiares</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <mat-checkbox formControlName="hypertension">Hipertensión</mat-checkbox>
+      <mat-checkbox formControlName="hypotension">Hipotensión</mat-checkbox>
+      <mat-checkbox formControlName="diabetes">Diabetes</mat-checkbox>
+      <mat-checkbox formControlName="mentalIllness">Enfermedad Mental</mat-checkbox>
+      <mat-checkbox formControlName="kidneyDisease">Enfermedad del Riñón</mat-checkbox>
+      <mat-checkbox formControlName="syphilis">Sífilis</mat-checkbox>
+      <mat-checkbox formControlName="cancer">Cáncer</mat-checkbox>
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full mt-4">
+      <mat-label>Otra enfermedad importante</mat-label>
+      <textarea matInput formControlName="otherImportantDisease" rows="2" placeholder="Especifique"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mt-4">
+      <mat-label>Observaciones generales</mat-label>
+      <textarea matInput formControlName="observations" rows="3" placeholder="Observaciones"></textarea>
+    </mat-form-field>
+  </div>
+
+
+  <!-- Página 4: Datos No Patológicos -->
+  <div *ngIf="currentStep === 5" formGroupName="nonPathologicalData">
+    <h2 class="text-xl font-semibold mb-4">Datos No Patológicos</h2>
+
+    <mat-checkbox formControlName="smokes">¿Fuma usted?</mat-checkbox>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>¿Qué cantidad?</mat-label>
+      <input matInput formControlName="smokingQuantity" placeholder="Cantidad" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="drinksAlcohol">¿Consume bebidas alcohólicas?</mat-checkbox>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Frecuencia y cantidad</mat-label>
+      <input matInput formControlName="alcoholFrequencyAndQuantity" placeholder="Frecuencia y cantidad" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="usesMedicationFrequently">¿Usa algún medicamento frecuentemente?</mat-checkbox>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>¿Cuáles?</mat-label>
+      <input matInput formControlName="medicationDetails" placeholder="Detalles de medicamentos" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>¿Usa alguna otra sustancia?</mat-label>
+      <input matInput formControlName="usesOtherSubstances" placeholder="Sustancias" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput formControlName="observations" rows="3"></textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- Página 5: Datos Dentales -->
+  <div *ngIf="currentStep === 6" formGroupName="dentalData">
+    <h2 class="text-xl font-semibold mb-4">Datos Dentales</h2>
+
+    <mat-checkbox formControlName="tmjClicking">Chasquido</mat-checkbox>
+    <mat-checkbox formControlName="tmjCrepitation">Crepitación</mat-checkbox>
+    <mat-checkbox formControlName="musclePain">Dolor muscular</mat-checkbox>
+    <mat-checkbox formControlName="earPain">Dolor de oídos</mat-checkbox>
+    <mat-checkbox formControlName="difficultyOpeningClosing">Dificultad de apertura o cierre</mat-checkbox>
+    <mat-checkbox formControlName="muscleFatigue">Cansancio muscular</mat-checkbox>
+    <mat-checkbox formControlName="difficultyChewing">Dificultad para masticar</mat-checkbox>
+    <mat-checkbox formControlName="tmjPain">Dolor en la ATM</mat-checkbox>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput formControlName="observations" rows="3"></textarea>
+    </mat-form-field>
+  </div>
+
+
+  <div *ngIf="currentStep === 7">
+    <h3 class="text-xl font-semibold mb-4">Selector de Sectores Dentales</h3>
+
+    <div *ngFor="let line of toothLines">
+      <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
+
+        <ng-container *ngFor="let toothNumber of line">
+          <div style="text-align: center;">
+            <ng-container *ngIf="getToothStatusControl(toothNumber) as status">
+              <app-tooth-sector-selector [toothNumber]="toothNumber" [selectedSectors]="status.get('sectors')?.value"
+                (selectionChange)="onToothSectorChange(toothSectorStatuses.controls.indexOf(status), $event)">
+              </app-tooth-sector-selector>
+              <div>{{ toothNumber }}</div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+
+    <mat-form-field appearance="fill" class="w-full mt-4">
+      <mat-label>Observaciones generales</mat-label>
+      <textarea matInput formControlName="toothSectorObservations" rows="3" placeholder="Observaciones"></textarea>
+    </mat-form-field>
+  </div>
+
+
+  <!-- Navegación -->
+  <div class="flex justify-between mt-6">
+    <button type="button" (click)="prevStep()" [disabled]="currentStep === 1"
+      class="btn btn-outline px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">
+      Anterior
+    </button>
+    <button type="button" (click)="nextStep()" *ngIf="currentStep < maxSteps"
+      class="btn btn-primary px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
+      Siguiente
+    </button>
+    <button type="submit" *ngIf="currentStep === maxSteps"
+      class="btn btn-primary px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700">
+      Enviar
+    </button>
+  </div>
+</form>

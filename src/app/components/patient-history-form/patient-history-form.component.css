@@ -1,0 +1,18 @@
+.dental-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tooth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tooth-number {
+  margin-top: 4px;
+  font-size: 12px;
+}
